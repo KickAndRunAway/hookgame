@@ -713,7 +713,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 1342724521}
   jumpAmount: 10
-  MovementSpeed: 10
+  MovementSpeed: 5
   boxSizeV: {x: 0.9, y: 0.1}
   boxSizeH: {x: 0.05, y: 0.9}
   castDistanceV: 0.58
