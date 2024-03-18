@@ -1,0 +1,56 @@
+{
+    "name": "Platformer (Bora ist ein kek b87",
+    "maps": [
+        {
+            "name": "Player",
+            "id": "7a6594db-001b-45c0-913a-329e2f5b7faf",
+            "actions": [
+                {
+                    "name": "Move",
+                    "type": "Button",
+                    "id": "7474f91e-4fea-4410-9b16-0189514015a5",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "Horizontal Movement",
+                    "id": "3d970655-e31e-4caf-b5bc-ede0dfa8e16c",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "55a0a25b-3ee7-49b7-a3af-f59ace75cafc",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "9f09cf2f-c224-4e99-aecc-d24b8c69857f",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
