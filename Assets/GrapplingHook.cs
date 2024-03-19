@@ -53,7 +53,11 @@ public class GrapplingHook : MonoBehaviour
                 {
                     // 4
                     // Jump slightly to distance the player a little from the ground after grappling to something.
-                    transform.GetComponent<Rigidbody2D>().AddForce(new Vector2(15, 47), ForceMode2D.Impulse);
+                    //launches you potentially in a circle, change new vector values
+                    if(playerMovement.isGrounded())
+                    {
+                        transform.GetComponent<Rigidbody2D>().AddForce(new Vector2(7, 7), ForceMode2D.Impulse);
+                    }
                     ropePositions.Add(hit.point);
                     ropeJoint.distance = Vector2.Distance(playerPosition, hit.point);
                     ropeJoint.enabled = true;
@@ -179,6 +183,7 @@ public class GrapplingHook : MonoBehaviour
 
         // 4
         var aimDirection = Quaternion.Euler(0, 0, aimAngle * Mathf.Rad2Deg) * Vector2.right;
+        //var aimDirection = Quaternion.Euler(aimAngle * Mathf.Rad2Deg, 0, 0) * Vector2.right;
         // 5
         playerPosition = transform.position;
 
@@ -186,6 +191,7 @@ public class GrapplingHook : MonoBehaviour
         if (!ropeAttached)
         {
             SetCrosshairPosition(aimAngle);
+            //SetCrosshairPosition(worldMousePosition);
         }
         else 
         {
