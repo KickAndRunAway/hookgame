@@ -13,9 +13,14 @@ public class Movement : MonoBehaviour
     public float castDistanceV;
     public float castDistanceH;
     public LayerMask groundLayer;
+    public Vector2 ropeHook;
+    public GrapplingHook GrapplingHook;
+
+// if(GrapplingHook.ropeAttached()) should check if the player is hanging
 
     void Update()
     {
+
         if (isGrounded() && Input.GetKeyDown(KeyCode.W))
         {
             rb.AddForce(Vector2.up * jumpAmount, ForceMode2D.Impulse);
@@ -34,18 +39,18 @@ public class Movement : MonoBehaviour
 
     public bool isWallRight()
     {
-        if(Physics2D.BoxCast(transform.position, boxSizeH, 0, transform.right, castDistanceH, groundLayer))
+        if(Physics2D.BoxCast(transform.position, boxSizeH, 0, transform.right, castDistanceH, groundLayer)||GrapplingHook.ropeAttached)
         {
             return false;
         }
         {
             return true;
-        }
+        }   
     }
 
     public bool isWallLeft()
     {
-        if(Physics2D.BoxCast(transform.position, boxSizeH, 0, -transform.right, castDistanceH, groundLayer))
+        if(Physics2D.BoxCast(transform.position, boxSizeH, 0, -transform.right, castDistanceH, groundLayer)||GrapplingHook.ropeAttached)
         {
             return false;
         }
