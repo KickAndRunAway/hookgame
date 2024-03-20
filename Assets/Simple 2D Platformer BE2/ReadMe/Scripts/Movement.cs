@@ -60,7 +60,7 @@ public class Movement : MonoBehaviour
 
     public bool isWallRight()
     {
-        if(Physics2D.BoxCast(transform.position, boxSizeH, 0, transform.right, castDistanceH, groundLayer))
+        if(Physics2D.BoxCast(transform.position, boxSizeH, 0, transform.right, castDistanceH, groundLayer)||GrapplingHook.ropeAttached)
         {
             return false;
         }
@@ -71,7 +71,7 @@ public class Movement : MonoBehaviour
 
     public bool isWallLeft()
     {
-        if(Physics2D.BoxCast(transform.position, boxSizeH, 0, -transform.right, castDistanceH, groundLayer))
+        if(Physics2D.BoxCast(transform.position, boxSizeH, 0, -transform.right, castDistanceH, groundLayer)||GrapplingHook.ropeAttached)
         {
             return false;
         }
