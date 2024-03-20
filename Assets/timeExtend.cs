@@ -21,14 +21,6 @@ public class timeExtend : MonoBehaviour
         triggerActive = false;
     }
 
-    public void ChangeSprite1()
-    {
-        spriteRenderer.sprite = newSprite;
-    }
-    public void ChangeSprite2()
-    {
-        spriteRenderer.sprite = oldSprite;
-    }
     private void Update()
     {
         if (!lmao)
