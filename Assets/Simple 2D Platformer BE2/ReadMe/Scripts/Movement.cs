@@ -13,23 +13,49 @@ public class Movement : MonoBehaviour
     public float castDistanceV;
     public float castDistanceH;
     public LayerMask groundLayer;
+    public Vector2 ropeHook;
+    public GrapplingHook GrapplingHook;
+    public float speed;
+
+// if(GrapplingHook.ropeAttached()) should check if the player is hanging
 
     void Update()
     {
+
         if (isGrounded() && Input.GetKeyDown(KeyCode.W))
         {
             rb.AddForce(Vector2.up * jumpAmount, ForceMode2D.Impulse);
         }
 
-        if (Input.GetKey(KeyCode.A) && isWallLeft())
+        if (Input.GetKey(KeyCode.A) && isWallLeft() && rb.velocity.x > -5)
         {
-            transform.Translate(Vector2.right * -MovementSpeed * Time.deltaTime);
+            if (rb.velocity.x > -2)
+            {
+                rb.AddForce(Vector2.right * -MovementSpeed / 20, ForceMode2D.Impulse);
+            }
+            else
+            {
+                rb.AddForce(Vector2.right * -MovementSpeed / 100, ForceMode2D.Impulse);
+            }
         }
 
-        if (Input.GetKey(KeyCode.D) && isWallRight())
+        else if (Input.GetKey(KeyCode.D) && isWallRight() && rb.velocity.x < 5)
         {
-            transform.Translate(Vector2.right * MovementSpeed * Time.deltaTime);
+            if (rb.velocity.x < 2)
+            {
+                rb.AddForce(Vector2.right * MovementSpeed / 20, ForceMode2D.Impulse);
+            }
+            else
+            {
+                rb.AddForce(Vector2.right * MovementSpeed / 100, ForceMode2D.Impulse);
+            }
         }
+        
+        if (!Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A))
+        {
+            rb.AddForce(Vector2.right * -rb.velocity.x / 50, ForceMode2D.Impulse);
+        }
+        speed = rb.velocity.x;
     }
 
     public bool isWallRight()
@@ -40,7 +66,7 @@ public class Movement : MonoBehaviour
         }
         {
             return true;
-        }
+        }   
     }
 
     public bool isWallLeft()
