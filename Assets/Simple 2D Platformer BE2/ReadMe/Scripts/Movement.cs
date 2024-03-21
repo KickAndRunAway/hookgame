@@ -50,6 +50,12 @@ public class Movement : MonoBehaviour
                 rb.AddForce(Vector2.right * MovementSpeed / 100, ForceMode2D.Impulse);
             }
         }
+
+        if (GrapplingHook.ropeAttached && Input.GetKey(KeyCode.S))
+        {
+            rb.AddForce(Vector2.up * MovementSpeed / 100, ForceMode2D.Impulse);
+        }
+            
         
         if (!Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A))
         {

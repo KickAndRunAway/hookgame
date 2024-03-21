@@ -73,7 +73,7 @@ public class GrapplingHook : MonoBehaviour
             }
         }
 
-        if (Input.GetMouseButton(1))
+        if (Input.GetMouseButtonUp(0))
         {
             ResetRope();
         }
