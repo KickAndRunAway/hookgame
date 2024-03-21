@@ -27,7 +27,7 @@ public class Movement : MonoBehaviour
             rb.AddForce(Vector2.up * jumpAmount, ForceMode2D.Impulse);
         }
 
-        if (Input.GetKey(KeyCode.A) && isWallLeft() && rb.velocity.x > -5)
+        if (Input.GetKey(KeyCode.A) && isWallLeft() && rb.velocity.x > -speed)
         {
             if (rb.velocity.x > -2)
             {
@@ -39,7 +39,7 @@ public class Movement : MonoBehaviour
             }
         }
 
-        else if (Input.GetKey(KeyCode.D) && isWallRight() && rb.velocity.x < 5)
+        else if (Input.GetKey(KeyCode.D) && isWallRight() && rb.velocity.x < speed)
         {
             if (rb.velocity.x < 2)
             {
@@ -55,7 +55,7 @@ public class Movement : MonoBehaviour
         {
             rb.AddForce(Vector2.right * -rb.velocity.x / 50, ForceMode2D.Impulse);
         }
-        speed = rb.velocity.x;
+        //speed = rb.velocity.x;
     }
 
     public bool isWallRight()
