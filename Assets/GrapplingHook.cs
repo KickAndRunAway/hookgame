@@ -12,6 +12,7 @@ public class GrapplingHook : MonoBehaviour
     public SpriteRenderer crosshairSprite;
     public Movement playerMovement;
     public bool ropeAttached = false;
+    public float aimAngle;
     private Vector2 playerPosition;
     private Rigidbody2D ropeHingeAnchorRb;
     private SpriteRenderer ropeHingeAnchorSprite;

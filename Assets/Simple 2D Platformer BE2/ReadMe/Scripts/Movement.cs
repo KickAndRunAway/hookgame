@@ -51,9 +51,19 @@ public class Movement : MonoBehaviour
             }
         }
 
-        if (GrapplingHook.ropeAttached && Input.GetKey(KeyCode.S))
+        if (GrapplingHook.ropeAttached)
         {
-            rb.AddForce(Vector2.up * MovementSpeed / 100, ForceMode2D.Impulse);
+            if (Input.GetKey(KeyCode.A))
+            {
+                rb.AddForce(Vector2.up * Mathf.Cos(GrapplingHook.aimAngle) / 50, ForceMode2D.Impulse);
+                rb.AddForce(Vector2.right * -Mathf.Sin(GrapplingHook.aimAngle) / 50, ForceMode2D.Impulse);
+            }
+
+            if (Input.GetKey(KeyCode.D))
+            {
+                rb.AddForce(Vector2.up * -Mathf.Cos(GrapplingHook.aimAngle) / 50, ForceMode2D.Impulse);
+                rb.AddForce(Vector2.right * Mathf.Sin(GrapplingHook.aimAngle) / 50, ForceMode2D.Impulse);
+            }
         }
             
         
@@ -66,35 +76,17 @@ public class Movement : MonoBehaviour
 
     public bool isWallRight()
     {
-        if(Physics2D.BoxCast(transform.position, boxSizeH, 0, transform.right, castDistanceH, groundLayer)||GrapplingHook.ropeAttached)
-        {
-            return false;
-        }
-        {
-            return true;
-        }   
+        return !Physics2D.BoxCast(transform.position, boxSizeH, 0, transform.right, castDistanceH, groundLayer) || GrapplingHook.ropeAttached;
     }
 
     public bool isWallLeft()
     {
-        if(Physics2D.BoxCast(transform.position, boxSizeH, 0, -transform.right, castDistanceH, groundLayer)||GrapplingHook.ropeAttached)
-        {
-            return false;
-        }
-        {
-            return true;
-        }
+        return !Physics2D.BoxCast(transform.position, boxSizeH, 0, -transform.right, castDistanceH, groundLayer) || GrapplingHook.ropeAttached;
     }
 
     public bool isGrounded()
     {
-        if(Physics2D.BoxCast(transform.position, boxSizeV, 0, -transform.up, castDistanceV, groundLayer))
-        {
-            return true;
-        }
-        {
-            return false;
-        }
+        return Physics2D.BoxCast(transform.position, boxSizeV, 0, -transform.up, castDistanceV, groundLayer);
     }
 
     private void OnDrawGizmos()
