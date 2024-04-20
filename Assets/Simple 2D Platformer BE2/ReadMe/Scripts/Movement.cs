@@ -17,8 +17,9 @@ public class Movement : MonoBehaviour
     public GrapplingHook GrapplingHook;
     public float maxSpeed;
     public int keys = 0;
+    public Animator animator;
 
-// if(GrapplingHook.ropeAttached()) should check if the player is hanging
+    // if(GrapplingHook.ropeAttached()) should check if the player is hanging
 
     void Update()
     {
@@ -27,6 +28,7 @@ public class Movement : MonoBehaviour
         {
             rb.AddForce(Vector2.up * jumpAmount, ForceMode2D.Impulse);
         }
+        else
 
         if (Input.GetKey(KeyCode.A) && isWallLeft() && rb.velocity.x > -maxSpeed)
         {
@@ -71,6 +73,7 @@ public class Movement : MonoBehaviour
         if (!Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A))
         {
             rb.AddForce(Vector2.right * -rb.velocity.x / 50, ForceMode2D.Impulse);
+
         }
         //speed = rb.velocity.x;
     }
