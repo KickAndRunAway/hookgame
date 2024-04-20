@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class timeExtend : MonoBehaviour
+public class Key : MonoBehaviour
 {
     private bool triggerActive = false;
     private bool used = false;
@@ -10,6 +10,7 @@ public class timeExtend : MonoBehaviour
     public Sprite farSprite;
     public Sprite nearSprite;
     public Sprite usedSprite;
+    public Movement Movement;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -32,6 +33,7 @@ public class timeExtend : MonoBehaviour
                 {
                     //function here
                     used = true;
+                    Movement.keys ++;
                 }
             }
             else

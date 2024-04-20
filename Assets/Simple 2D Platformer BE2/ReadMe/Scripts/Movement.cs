@@ -16,6 +16,7 @@ public class Movement : MonoBehaviour
     public Vector2 ropeHook;
     public GrapplingHook GrapplingHook;
     public float maxSpeed;
+    public int keys = 0;
 
 // if(GrapplingHook.ropeAttached()) should check if the player is hanging
 
