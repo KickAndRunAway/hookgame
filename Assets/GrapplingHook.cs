@@ -5,11 +5,8 @@ using System.Linq;
 
 public class GrapplingHook : MonoBehaviour
 {
-    // 1
     public GameObject ropeHingeAnchor;
     public DistanceJoint2D ropeJoint;
-    public Transform crosshair;
-    public SpriteRenderer crosshairSprite;
     public Movement playerMovement;
     public bool ropeAttached = false;
     public float aimAngle;
@@ -22,40 +19,22 @@ public class GrapplingHook : MonoBehaviour
     private bool distanceSet;
     public float climbSpeed = 6;
     private List<Vector2> ropePositions = new List<Vector2>();
-    private void SetCrosshairPosition(float aimAngle)
-    {
-        if (!crosshairSprite.enabled)
-        {
-            crosshairSprite.enabled = true;
-        }
 
-        var x = transform.position.x + 1 * Mathf.Cos(aimAngle);
-        var y = transform.position.y + 1 * Mathf.Sin(aimAngle);
-
-        var crossHairPosition = new Vector3(x, y, 0);
-        crosshair.transform.position = crossHairPosition;
-    }
-    // 1
-    private void HandleInput(Vector2 aimDirection)
+    private void HandleInput(Vector2 aimDirection) //alle möglichen inputs der hook
     {   
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0)) //linker mausklick schiesst die hook
         {
-            // 2
             if (ropeAttached) return;
             ropeRenderer.enabled = true;
 
             var hit = Physics2D.Raycast(playerPosition, aimDirection, ropeMaxCastDistance, groundLayer);
         
-            // 3
-            if (hit.collider != null)
+            if (hit.collider != null) //hook trifft wand
             {
                 ropeAttached = true;
                 if (!ropePositions.Contains(hit.point))
                 {
-                    // 4
-                    // Jump slightly to distance the player a little from the ground after grappling to something.
-                    //launches you potentially in a circle, change new vector values
-                    if(playerMovement.isGrounded())
+                    if(playerMovement.isGrounded()) //player springt ein wenig und wird dann gezogen
                     {
                         transform.GetComponent<Rigidbody2D>().AddForce(new Vector2(5, 5), ForceMode2D.Impulse);
                     }
@@ -65,7 +44,6 @@ public class GrapplingHook : MonoBehaviour
                     ropeHingeAnchorSprite.enabled = true;
                 }
             }
-            // 5
             else
             {
                 ropeRenderer.enabled = false;
@@ -74,14 +52,13 @@ public class GrapplingHook : MonoBehaviour
             }
         }
 
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0)) //wenn man linke maustaste loslässt, wird die hook eingeholt
         {
             ResetRope();
         }
     }
 
-    // 6
-    private void ResetRope()
+    private void ResetRope() //hook reset
     {
         ropeJoint.enabled = false;
         ropeAttached = false;
@@ -92,9 +69,8 @@ public class GrapplingHook : MonoBehaviour
         ropeHingeAnchorSprite.enabled = false;
     }
     
-    private void HandleRopeLength()
+    private void HandleRopeLength() //player wird zur hook gezogen
     {
-        // 1
         if (ropeAttached && ropeJoint.distance > 1)
         {
             ropeJoint.distance -= Time.deltaTime * climbSpeed;
@@ -103,31 +79,25 @@ public class GrapplingHook : MonoBehaviour
 
     void Awake()
     {
-        // 2
         ropeJoint.enabled = false;
         playerPosition = transform.position;
         ropeHingeAnchorRb = ropeHingeAnchor.GetComponent<Rigidbody2D>();
         ropeHingeAnchorSprite = ropeHingeAnchor.GetComponent<SpriteRenderer>();
     }
-    private void UpdateRopePositions()
+    private void UpdateRopePositions() //rope vertex positionen, also beim player und der hook
     {
-        // 1
         if (!ropeAttached)
         {
             return;
         }
 
-        // 2
         ropeRenderer.positionCount = ropePositions.Count + 1;
 
-        // 3
         for (var i = ropeRenderer.positionCount - 1; i >= 0; i--)
         {
-            if (i != ropeRenderer.positionCount - 1) // if not the Last point of line renderer
+            if (i != ropeRenderer.positionCount - 1) 
             {
                 ropeRenderer.SetPosition(i, ropePositions[i]);
-                    
-                // 4
                 if (i == ropePositions.Count - 1 || ropePositions.Count == 1)
                 {
                     var ropePosition = ropePositions[ropePositions.Count - 1];
@@ -150,7 +120,6 @@ public class GrapplingHook : MonoBehaviour
                         }
                     }
                 }
-                // 5
                 else if (i - 1 == ropePositions.IndexOf(ropePositions.Last()))
                 {
                     var ropePosition = ropePositions.Last();
@@ -164,7 +133,6 @@ public class GrapplingHook : MonoBehaviour
             }
             else
             {
-                // 6
                 ropeRenderer.SetPosition(i, transform.position);
             }
         }
@@ -172,32 +140,16 @@ public class GrapplingHook : MonoBehaviour
 
     void Update()
     {
-        // 3
         var worldMousePosition =
             Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0f));
         var facingDirection = worldMousePosition - transform.position;
         var aimAngle = Mathf.Atan2(facingDirection.y, facingDirection.x);
-        if (aimAngle < 0f)
+        if (aimAngle < 15)
         {
             aimAngle = Mathf.PI * 2 + aimAngle;
         }
-
-        // 4
         var aimDirection = Quaternion.Euler(0, 0, aimAngle * Mathf.Rad2Deg) * Vector2.right;
-        //var aimDirection = Quaternion.Euler(aimAngle * Mathf.Rad2Deg, 0, 0) * Vector2.right;
-        // 5
         playerPosition = transform.position;
-
-        // 6
-        if (!ropeAttached)
-        {
-            SetCrosshairPosition(aimAngle);
-            //SetCrosshairPosition(worldMousePosition);
-        }
-        else 
-        {
-            crosshairSprite.enabled = false;
-        }
 
         HandleInput(aimDirection);
         UpdateRopePositions();

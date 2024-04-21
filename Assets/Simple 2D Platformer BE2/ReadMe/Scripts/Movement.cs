@@ -25,30 +25,30 @@ public class Movement : MonoBehaviour
 
 void Update()
     {
-        animator.SetFloat("speed", Mathf.Abs(rb.velocity.x));
+        animator.SetFloat("speed", Mathf.Abs(rb.velocity.x)); //wenn geschwindigkeit nicht 0 spielt die walk animation
 
-        if (!isGrounded() && !GrapplingHook.ropeAttached)
+        if (!isGrounded() && !GrapplingHook.ropeAttached) //nicht auf dem boden oder an der hook
         {
-            if (rb.velocity.y > 0)
+            if (rb.velocity.y > 0) //sprung
             {
                 animator.SetBool("hooked", false);
                 animator.SetBool("fall", false);
                 animator.SetBool("jump", true);
             }
-            else if (rb.velocity.y < 0)
+            else if (rb.velocity.y < 0) //fall
             {
                 animator.SetBool("hooked", false);
                 animator.SetBool("jump", false);
                 animator.SetBool("fall", true);
             }
         }
-        else if (isGrounded() && !GrapplingHook.ropeAttached)
+        else if (isGrounded() && !GrapplingHook.ropeAttached) //auf dem boden und nicht an der hook, also idle oder laufen
         {
             animator.SetBool("jump", false);
             animator.SetBool("hooked", false);
             animator.SetBool("fall", false);
         }
-        else if (!isGrounded() && GrapplingHook.ropeAttached)
+        else if (!isGrounded() && GrapplingHook.ropeAttached) //nicht auf dem boden aber an der hook
         {
             animator.SetBool("jump", false);
             animator.SetBool("fall", false);
@@ -64,7 +64,7 @@ void Update()
             Flip();
         }
 
-        void Flip()
+        void Flip() //spiegelt den player sprite wenn er in die falsche richtung schaut
         {
             m_FacingRight = !m_FacingRight;
             Vector2 theScale = transform.localScale;
@@ -72,14 +72,13 @@ void Update()
             transform.localScale = theScale;
         }
 
-        if (isGrounded() && Input.GetKeyDown(KeyCode.W))
+        if (isGrounded() && Input.GetKeyDown(KeyCode.W)) //jump
         {
             rb.AddForce(Vector2.up * jumpAmount, ForceMode2D.Impulse);
-            //animator.SetBool("jump", true)
         }
         else
 
-        if (Input.GetKey(KeyCode.A) && isWallLeft() && rb.velocity.x > -maxSpeed)
+        if (Input.GetKey(KeyCode.A) && isWallLeft() && rb.velocity.x > -maxSpeed) //linke wand kollision
         {
             if (rb.velocity.x > -2)
             {
@@ -91,7 +90,7 @@ void Update()
             }
         }
 
-        else if (Input.GetKey(KeyCode.D) && isWallRight() && rb.velocity.x < maxSpeed)
+        else if (Input.GetKey(KeyCode.D) && isWallRight() && rb.velocity.x < maxSpeed) //rechte wand kollision
         {
             if (rb.velocity.x < 2)
             {
@@ -103,9 +102,8 @@ void Update()
             }
         }
 
-        if (GrapplingHook.ropeAttached)
+        if (GrapplingHook.ropeAttached) //schwung während an der hook
         {
-            //hooked animation
             if (Input.GetKey(KeyCode.A))
             {
                 rb.AddForce(Vector2.up * Mathf.Cos(GrapplingHook.aimAngle) / 50, ForceMode2D.Impulse);
@@ -120,12 +118,11 @@ void Update()
         }
             
         
-        if (!Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A))
+        if (!Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A)) //stoppt den player langsam
         {
             rb.AddForce(Vector2.right * -rb.velocity.x / 50, ForceMode2D.Impulse);
 
         }
-        //speed = rb.velocity.x;
     }
 
     public bool isWallRight()
