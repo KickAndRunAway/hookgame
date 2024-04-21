@@ -140,14 +140,6 @@ void Update()
         return Physics2D.BoxCast(transform.position, boxSizeV, 0, -transform.up, castDistanceV, groundLayer);
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawWireCube(transform.position - transform.up * castDistanceV, boxSizeV);
-        Gizmos.DrawWireCube(transform.position + transform.right * castDistanceH, boxSizeH);
-        Gizmos.DrawWireCube(transform.position - transform.right * castDistanceH, boxSizeH);
-    }
-
-
     void Start()
     {
         
