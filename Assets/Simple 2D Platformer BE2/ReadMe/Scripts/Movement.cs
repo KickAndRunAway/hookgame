@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class Movement : MonoBehaviour
 {
@@ -18,15 +19,63 @@ public class Movement : MonoBehaviour
     public float maxSpeed;
     public int keys = 0;
     public Animator animator;
+    private bool m_FacingRight = true;
 
-    // if(GrapplingHook.ropeAttached()) should check if the player is hanging
+// if(GrapplingHook.ropeAttached()) should check if the player is hanging
 
-    void Update()
+void Update()
     {
+        animator.SetFloat("speed", Mathf.Abs(rb.velocity.x));
+
+        if (!isGrounded() && !GrapplingHook.ropeAttached)
+        {
+            if (rb.velocity.y > 0)
+            {
+                animator.SetBool("hooked", false);
+                animator.SetBool("fall", false);
+                animator.SetBool("jump", true);
+            }
+            else if (rb.velocity.y < 0)
+            {
+                animator.SetBool("hooked", false);
+                animator.SetBool("jump", false);
+                animator.SetBool("fall", true);
+            }
+        }
+        else if (isGrounded() && !GrapplingHook.ropeAttached)
+        {
+            animator.SetBool("jump", false);
+            animator.SetBool("hooked", false);
+            animator.SetBool("fall", false);
+        }
+        else if (!isGrounded() && GrapplingHook.ropeAttached)
+        {
+            animator.SetBool("jump", false);
+            animator.SetBool("fall", false);
+            animator.SetBool("hooked", true);
+        }
+
+        if (rb.velocity.x > 0 && !m_FacingRight)
+        {
+            Flip();
+        }
+        else if (rb.velocity.x < 0 && m_FacingRight)
+        {
+            Flip();
+        }
+
+        void Flip()
+        {
+            m_FacingRight = !m_FacingRight;
+            Vector2 theScale = transform.localScale;
+            theScale.x *= -1;
+            transform.localScale = theScale;
+        }
 
         if (isGrounded() && Input.GetKeyDown(KeyCode.W))
         {
             rb.AddForce(Vector2.up * jumpAmount, ForceMode2D.Impulse);
+            //animator.SetBool("jump", true)
         }
         else
 
@@ -56,6 +105,7 @@ public class Movement : MonoBehaviour
 
         if (GrapplingHook.ropeAttached)
         {
+            //hooked animation
             if (Input.GetKey(KeyCode.A))
             {
                 rb.AddForce(Vector2.up * Mathf.Cos(GrapplingHook.aimAngle) / 50, ForceMode2D.Impulse);
