@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using static UnityEngine.RuleTile.TilingRuleOutput;
 
@@ -19,12 +20,15 @@ public class Movement : MonoBehaviour
     public float maxSpeed;
     public int keys = 0;
     public Animator animator;
+    public float timer = 0;
     private bool m_FacingRight = true;
 
 // if(GrapplingHook.ropeAttached()) should check if the player is hanging
 
 void Update()
     {
+        timer += Time.deltaTime;
+
         animator.SetFloat("speed", Mathf.Abs(rb.velocity.x)); //wenn geschwindigkeit nicht 0 spielt die walk animation
 
         if (!isGrounded() && !GrapplingHook.ropeAttached) //nicht auf dem boden oder an der hook
@@ -64,7 +68,7 @@ void Update()
             Flip();
         }
 
-        void Flip() //spiegelt den player sprite wenn er in die falsche richtung schaut
+        void Flip() //spiegelt den player sprite wenn er sich umdreht
         {
             m_FacingRight = !m_FacingRight;
             Vector2 theScale = transform.localScale;
