@@ -26,6 +26,10 @@ public class Door : MonoBehaviour
         if (Movement.keys == 3)
         {
             spriteRenderer.sprite = openSprite;
+            if (Input.GetKeyDown(KeyCode.Space) && triggerActive)
+            {
+
+            }
         }
         else
         {
