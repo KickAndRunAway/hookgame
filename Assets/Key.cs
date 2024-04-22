@@ -7,8 +7,6 @@ public class Key : MonoBehaviour
     private bool triggerActive = false;
     private bool used = false;
     public SpriteRenderer spriteRenderer;
-    public Sprite farSprite;
-    public Sprite nearSprite;
     public Movement Movement;
 
     private void OnTriggerEnter2D(Collider2D other) //player in der item hitbox
@@ -25,18 +23,13 @@ public class Key : MonoBehaviour
     {
         if (!used) //wenn noch nitch benutzt
         {
-            if (triggerActive) //wenn player nahe beim item ändert sich das item aussehen um zu zeigen, dass man interagieren kann
+            if (triggerActive) //wenn player nahe beim item kann man interagieren
             {
-                spriteRenderer.sprite = nearSprite;
                 if (Input.GetKeyDown(KeyCode.Space)) //interaktion initiiert, item wird benutzt
                 {
                     used = true;
                     Movement.keys ++;
                 }
-            }
-            else //item weit weg, geht zum normalen aussehen zurück
-            {
-                spriteRenderer.sprite = farSprite;
             }
         }
         else // item benutzt, sprite leer, item verschwindet aus der spieler sicht
