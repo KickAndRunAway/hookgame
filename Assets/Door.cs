@@ -7,11 +7,10 @@ public class Door : MonoBehaviour
 {
     private bool triggerActive = false;
     public SpriteRenderer spriteRenderer;
-    public Sprite openSprite;
-    public Sprite closedSprite;
     public ResultScreen ResultScreen;
     public Timer Timer;
     public Movement Movement;
+    public Animator animator;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -25,18 +24,18 @@ public class Door : MonoBehaviour
 
     private void Update()
     {
-        if (Movement.keys == 3)
+        if (Input.GetKeyDown(KeyCode.Space) && triggerActive)
         {
-            spriteRenderer.sprite = openSprite;
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Movement.keys == 3)
             {
+                animator.SetBool("allKeys", true);
                 ResultScreen.Setup(Timer.timer);
             }
+            else
+            {
+                //show text that you are lacking
+            }
+            
         }
-        else
-        {
-            spriteRenderer.sprite = closedSprite;
-        }
-
     }
 }
