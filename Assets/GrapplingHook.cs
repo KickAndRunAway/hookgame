@@ -22,6 +22,7 @@ public class GrapplingHook : MonoBehaviour
     public Texture2D closeCursor;
     public Texture2D farCursor;
     private bool cursorWhite = true;
+    public Timer Timer;
 
     private void HandleInput(Vector2 aimDirection) //alle möglichen inputs der hook
     {   
@@ -32,7 +33,7 @@ public class GrapplingHook : MonoBehaviour
 
             var hit = Physics2D.Raycast(playerPosition, aimDirection, ropeMaxCastDistance, groundLayer);
         
-            if (hit.collider != null) //hook trifft wand
+            if (hit.collider != null && Timer.timer >= 0) //hook trifft wand
             {
                 ropeAttached = true;
                 if (!ropePositions.Contains(hit.point))
