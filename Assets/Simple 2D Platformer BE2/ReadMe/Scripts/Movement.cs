@@ -21,14 +21,15 @@ public class Movement : MonoBehaviour
     public int keys = 0;
     public Animator animator;
     private bool m_FacingRight = true;
-    public Timer Timer;
+    private float timer = -3;
 
 // if(GrapplingHook.ropeAttached()) should check if the player is hanging
 
 void Update()
     {
+        timer += Time.deltaTime;
 
-        if (Timer.timer >= 0)
+        if (timer >= 0)
         {
 
             animator.SetFloat("speed", Mathf.Abs(rb.velocity.x)); //wenn geschwindigkeit nicht 0 spielt die walk animation
