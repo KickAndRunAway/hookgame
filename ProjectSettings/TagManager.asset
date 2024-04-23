@@ -14,8 +14,8 @@ TagManager:
   - UI
   - Rope
   - Pivot
-  - RevealedArea
-  - 
+  - FogOfWarMain
+  - FogOfWarSecondary
   - 
   - 
   - 
@@ -47,6 +47,9 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 1385958365
+    locked: 0
+  - name: FogOfWar
+    uniqueID: 2696332571
     locked: 0
   - name: UI
     uniqueID: 1356690321

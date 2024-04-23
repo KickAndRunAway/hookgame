@@ -9,6 +9,8 @@ public class death : MonoBehaviour
     //public BoxCollider2D bottom;
     //public BoxCollider2D side;
     private bool triggerActive = false;
+    public float deathTime = 180;
+    private float timer = -3;
 
     private void OnTriggerEnter2D(Collider2D other) //player in der hitbox
     {
@@ -28,7 +30,9 @@ public class death : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey("r") || triggerActive)
+        timer += Time.deltaTime;
+
+        if (Input.GetKey("r") || triggerActive || timer > deathTime)
         {
             Restart();
         }
@@ -37,5 +41,10 @@ public class death : MonoBehaviour
     void Restart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    void increaseDeathTime()
+    {
+
     }
 }

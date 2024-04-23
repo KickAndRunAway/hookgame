@@ -8,12 +8,7 @@ public class Timer : MonoBehaviour
 {
     public float timer = -3;
     public TextMeshProUGUI text;
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
     void Update()
     {
         timer += Time.deltaTime;
