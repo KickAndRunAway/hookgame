@@ -21,6 +21,8 @@ public class GrapplingHook : MonoBehaviour
     private List<Vector2> ropePositions = new List<Vector2>();
     public Texture2D closeCursor;
     public Texture2D farCursor;
+    private bool cursorWhite = true;
+    private float timer = -3;
 
     private void HandleInput(Vector2 aimDirection) //alle möglichen inputs der hook
     {   
@@ -31,7 +33,7 @@ public class GrapplingHook : MonoBehaviour
 
             var hit = Physics2D.Raycast(playerPosition, aimDirection, ropeMaxCastDistance, groundLayer);
         
-            if (hit.collider != null) //hook trifft wand
+            if (hit.collider != null && timer >= 0) //hook trifft wand
             {
                 ropeAttached = true;
                 if (!ropePositions.Contains(hit.point))
@@ -142,6 +144,8 @@ public class GrapplingHook : MonoBehaviour
 
     void Update()
     {
+        timer += Time.deltaTime;
+
         var worldMousePosition =
             Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0f));
         var facingDirection = worldMousePosition - transform.position;
@@ -153,22 +157,23 @@ public class GrapplingHook : MonoBehaviour
         var aimDirection = Quaternion.Euler(0, 0, aimAngle * Mathf.Rad2Deg) * Vector2.right;
         playerPosition = transform.position;
 
+        var hit = Physics2D.Raycast(playerPosition, aimDirection, ropeMaxCastDistance, groundLayer);
+
+        if (hit.collider != null && cursorWhite) //hook trifft wand
+        {
+            Cursor.SetCursor(closeCursor, Vector2.zero, CursorMode.Auto); //cursor teal wenn hook nutzbar ist, sonst cursor weiss
+            cursorWhite = false;
+        }
+        else if (hit.collider == null && !cursorWhite)
+        {
+            Cursor.SetCursor(farCursor, Vector2.zero, CursorMode.Auto);
+            cursorWhite = true;
+        }
+
         HandleInput(aimDirection);
         UpdateRopePositions();
         HandleRopeLength();
-        //Vector2 mousePosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-        //float distance = Vector2.Distance(playerPosition, mousePosition);
-        //if (distance <= ropeMaxCastDistance)
-        //{
-        //    Cursor.SetCursor(closeCursor, Vector2.zero, CursorMode.Auto);
-        //    //Debug.Log(mousePosition);
-        //}
-        //else if (distance > ropeMaxCastDistance)
-        //{
-        //    Cursor.SetCursor(farCursor, Vector2.zero, CursorMode.Auto);
-        //    //Debug.Log(distance);
-        //}
-            //cursor teal, sonst cursor weiss
+
     }
 
 }
