@@ -18,7 +18,7 @@ public class Movement : MonoBehaviour
     public Vector2 ropeHook;
     public GrapplingHook GrapplingHook;
     public float maxSpeed;
-    public int keys = 3;
+    public int keys = 0;
     public Animator animator;
     public float timer = 0;
     private bool m_FacingRight = true;

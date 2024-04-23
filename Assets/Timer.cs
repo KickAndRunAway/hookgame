@@ -8,7 +8,6 @@ public class Timer : MonoBehaviour
 {
     public float timer = 0;
     public TextMeshProUGUI text;
-    public GameObject Results;
     void Start()
     {
         
@@ -19,10 +18,6 @@ public class Timer : MonoBehaviour
     {
         timer += Time.deltaTime;
         text.text = ((int)(timer/600)%10).ToString() + ((int)(timer/60)%10).ToString() + ":" + ((int)((timer%60)/10)).ToString() + ((int)((timer%60)%10)).ToString() + ":" + ((int)(((timer*100)%60)/10)).ToString() + ((int)((timer*100)%60)%10).ToString();
-        if (Results.active)
-        {
-            gameObject.SetActive(false);
-        }
     }
     
 }
