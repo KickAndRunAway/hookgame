@@ -390,7 +390,7 @@ GameObject:
   - component: {fileID: 95141241}
   - component: {fileID: 95141240}
   m_Layer: 0
-  m_Name: death zone
+  m_Name: death zone & restart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -408,9 +408,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61de860e81d9c604b9293a1b04afcea1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  top: {fileID: 95141241}
-  bottom: {fileID: 95141242}
-  side: {fileID: 95141243}
 --- !u!61 &95141241
 BoxCollider2D:
   m_ObjectHideFlags: 0
