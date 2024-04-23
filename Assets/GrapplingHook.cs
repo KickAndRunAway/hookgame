@@ -19,6 +19,8 @@ public class GrapplingHook : MonoBehaviour
     private bool distanceSet;
     public float climbSpeed = 6;
     private List<Vector2> ropePositions = new List<Vector2>();
+    public Texture2D closeCursor;
+    public Texture2D farCursor;
 
     private void HandleInput(Vector2 aimDirection) //alle möglichen inputs der hook
     {   
@@ -154,6 +156,19 @@ public class GrapplingHook : MonoBehaviour
         HandleInput(aimDirection);
         UpdateRopePositions();
         HandleRopeLength();
+        //Vector2 mousePosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+        //float distance = Vector2.Distance(playerPosition, mousePosition);
+        //if (distance <= ropeMaxCastDistance)
+        //{
+        //    Cursor.SetCursor(closeCursor, Vector2.zero, CursorMode.Auto);
+        //    //Debug.Log(mousePosition);
+        //}
+        //else if (distance > ropeMaxCastDistance)
+        //{
+        //    Cursor.SetCursor(farCursor, Vector2.zero, CursorMode.Auto);
+        //    //Debug.Log(distance);
+        //}
+            //cursor teal, sonst cursor weiss
     }
 
 }
