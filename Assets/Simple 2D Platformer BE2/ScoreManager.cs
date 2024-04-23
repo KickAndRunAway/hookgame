@@ -3,52 +3,65 @@ using System.Linq;
 using UnityEngine;
 using System.IO;
 
-[System.Serializable]
-public class ScoreData : MonoBehaviour
-{
-    public List<int> scores = new List<int>();
-
-    public void AddScore(int score)
-    {
-        scores.Add(score);
-        scores = scores.OrderByDescending(s => s).ToList(); // Sort scores by descending order
-    }
-}
-
 public class ScoreManager : MonoBehaviour
 {
     private const string saveFileName = "scores.json";
 
-    public ScoreData scoreData;
+    public static ScoreManager Instance { get; private set; }
+
+    public List<float> scores = new List<float>();
+    public List<float> allScores = new List<float>();
+
+    private void Awake()
+    {
+        if (Instance == null) //wenn noch keine instance besteht, wird sie erstellt
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject); //wird nach dem erneuten laden nicht zerstört und ersetzt
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     private void Start()
     {
         LoadScores();
     }
 
-    public void AddScore(int score)
+    public void AddScore(float score) //fügt neuen score hinzu und sortiert zeiten
     {
-        scoreData.AddScore(score);
-        SaveScores();
+        scores.Add(score);
+        SortScores();
+        SaveScores(); 
     }
 
-    private void SaveScores()
+    public void SaveScores() //erstellt neues save file wenn es noch nicht besteht, sonst speichert es
     {
-        string json = JsonUtility.ToJson(scoreData);
+        string json = JsonUtility.ToJson(this);
         File.WriteAllText(Application.persistentDataPath + "/" + saveFileName, json);
     }
 
-    private void LoadScores()
+    public void LoadScores() //ladet alle gespeicherten scores von früher in die jetztige scores liste
     {
         string filePath = Application.persistentDataPath + "/" + saveFileName;
         if (File.Exists(filePath))
         {
             string json = File.ReadAllText(filePath);
-            scoreData = JsonUtility.FromJson<ScoreData>(json);
+            JsonUtility.FromJsonOverwrite(json, this);
+            //ScoreManager loadedScoreManager = JsonUtility.FromJson<ScoreManager>(json);
+
+            //allScores.Clear();
+            //allScores.AddRange(loadedScoreManager.scores);
+            //scores.Clear();
+            //scores.AddRange(allScores);
+            //scores.AddRange(loadedScoreManager.scores);
         }
-        else
-        {
-            scoreData = new ScoreData();
-        }
+    }
+
+    private void SortScores()
+    {
+        scores = scores.OrderByDescending(s => s).ToList();
     }
 }
