@@ -4193,7 +4193,7 @@ MonoBehaviour:
   ropeHook: {x: 0, y: 0}
   GrapplingHook: {fileID: 1342724527}
   maxSpeed: 22
-  keys: 3
+  keys: 0
   animator: {fileID: 43012640}
 --- !u!120 &1342724525
 LineRenderer:

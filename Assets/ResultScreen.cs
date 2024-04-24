@@ -28,25 +28,31 @@ public class ResultScreen : MonoBehaviour
     public void Setup(float finalTime, int finalFuel, float keySplit1, float keySplit2, float keySplit3)
     {
         ScoreManager.Instance.AddScore(finalTime); // neuer score wird dem save file hinzugefügt
-        ScoreManager scoreManager = FindObjectOfType<ScoreManager>();
+        ScoreManager scoreManager = FindObjectOfType<ScoreManager>(); //importiert score liste
         if (scoreManager != null)
         {
             List<float> scores = scoreManager.scores;
-            //list commands
-            //if current score is one of top 5 it should be bold
-            if (scoreManager.scores.Count >= 1)
+            if (scoreManager.scores.Count >= 1) //wenn mindestens 1 vorheriger score, farbe ändern, score float zu string, wenn dieser score der jetzige ist, wird er kursiv
             {
                 Color(scoreManager.scores[scoreManager.scores.Count - 1], top1);
                 top1.text = TimeToString(scoreManager.scores[scoreManager.scores.Count - 1]);
+                if (scoreManager.scores[scoreManager.scores.Count - 1] == finalTime)
+                {
+                    top1.fontStyle = FontStyles.Italic;
+                }          
             }
             else
             {
                 top1 = null;
             }
-            if (scoreManager.scores.Count >= 2)
+            if (scoreManager.scores.Count >= 2) //wie oben aber für zweitbesten score, geht so weiter für top 5
             {
                 Color(scoreManager.scores[scoreManager.scores.Count - 2], top2);
                 top2.text = TimeToString(scoreManager.scores[scoreManager.scores.Count - 2]);
+                if (scoreManager.scores[scoreManager.scores.Count - 2] == finalTime)
+                {
+                    top2.fontStyle = FontStyles.Italic;
+                }
             }
             else
             {
@@ -56,6 +62,10 @@ public class ResultScreen : MonoBehaviour
             {
                 Color(scoreManager.scores[scoreManager.scores.Count - 3], top3);
                 top3.text = TimeToString(scoreManager.scores[scoreManager.scores.Count - 3]);
+                if (scoreManager.scores[scoreManager.scores.Count - 3] == finalTime)
+                {
+                    top3.fontStyle = FontStyles.Italic;
+                }
             }
             else
             {
@@ -65,6 +75,10 @@ public class ResultScreen : MonoBehaviour
             {
                 Color(scoreManager.scores[scoreManager.scores.Count - 4], top4);
                 top4.text = TimeToString(scoreManager.scores[scoreManager.scores.Count - 4]);
+                if (scoreManager.scores[scoreManager.scores.Count - 4] == finalTime)
+                {
+                    top4.fontStyle = FontStyles.Italic;
+                }
             }
             else
             {
@@ -74,6 +88,10 @@ public class ResultScreen : MonoBehaviour
             {
                 Color(scoreManager.scores[scoreManager.scores.Count - 5], top5);
                 top5.text = TimeToString(scoreManager.scores[scoreManager.scores.Count - 5]);
+                if (scoreManager.scores[scoreManager.scores.Count - 5] == finalTime)
+                {
+                    top5.fontStyle = FontStyles.Italic;
+                }
             }
             else
             {
@@ -91,11 +109,11 @@ public class ResultScreen : MonoBehaviour
         fuelText.text = finalFuel.ToString();
     }
 
-    private string TimeToString(float time)
+    private string TimeToString(float time) //score float in sekunden zu string der in minuten : sekunden : millisekunden angezeigt wird
     {
         return ((int)(time / 600) % 10).ToString() + ((int)(time / 60) % 10).ToString() + ":" + ((int)((time % 60) / 10)).ToString() + ((int)((time % 60) % 10)).ToString() + ":" + ((int)(((time * 100) % 100) / 10)).ToString() + ((int)((time * 100) % 100) % 10).ToString();
     }
-    private void Color(float finalT, TextMeshProUGUI text)
+    private void Color(float finalT, TextMeshProUGUI text) //ändert score text farbe je nach dem wie gut die zeit war
     {
         if (finalT > 140f) // färbt die zielzeit je nach speed
         {

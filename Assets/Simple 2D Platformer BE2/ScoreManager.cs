@@ -13,7 +13,7 @@ public class ScoreData
     public void AddScore(int score)
     {
         scores.Add(score);
-        scores = scores.OrderByDescending(s => s).ToList(); // Sort scores by descending order
+        scores = scores.OrderByDescending(s => s).ToList(); // sortiert scores vn schlecht zu gut
     }
 }
 public class ScoreManager : MonoBehaviour
