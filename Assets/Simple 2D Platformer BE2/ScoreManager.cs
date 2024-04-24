@@ -2,7 +2,20 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using System.IO;
+using Unity.VisualScripting;
+using System;
 
+[System.Serializable]
+public class ScoreData
+{
+    public List<float> scores = new List<float>();
+
+    public void AddScore(int score)
+    {
+        scores.Add(score);
+        scores = scores.OrderByDescending(s => s).ToList(); // Sort scores by descending order
+    }
+}
 public class ScoreManager : MonoBehaviour
 {
     private const string saveFileName = "scores.json";
@@ -10,7 +23,6 @@ public class ScoreManager : MonoBehaviour
     public static ScoreManager Instance { get; private set; }
 
     public List<float> scores = new List<float>();
-    public List<float> allScores = new List<float>();
 
     private void Awake()
     {
@@ -50,13 +62,8 @@ public class ScoreManager : MonoBehaviour
         {
             string json = File.ReadAllText(filePath);
             JsonUtility.FromJsonOverwrite(json, this);
-            //ScoreManager loadedScoreManager = JsonUtility.FromJson<ScoreManager>(json);
-
-            //allScores.Clear();
-            //allScores.AddRange(loadedScoreManager.scores);
-            //scores.Clear();
-            //scores.AddRange(allScores);
-            //scores.AddRange(loadedScoreManager.scores);
+            ScoreData tempScoreData = JsonUtility.FromJson<ScoreData>(json);
+            scores = tempScoreData.scores;
         }
     }
 
