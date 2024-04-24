@@ -8,6 +8,8 @@ public class Key : MonoBehaviour
     private bool used = false;
     public SpriteRenderer spriteRenderer;
     public Movement Movement;
+    public Timer Timer;
+    public Door Door;
 
     private void OnTriggerEnter2D(Collider2D other) //player in der item hitbox
     {
@@ -25,10 +27,22 @@ public class Key : MonoBehaviour
         {
             if (triggerActive) //wenn player nahe beim item kann man interagieren
             {
-                if (Input.GetKeyDown(KeyCode.Space)) //interaktion initiiert, item wird benutzt
+                if (Input.GetKeyDown(KeyCode.Space)) //interaktion initiert, item wird benutzt
                 {
                     used = true;
                     Movement.keys ++;
+                    if (Movement.keys == 1)
+                    {
+                        Door.keySplit1 = Timer.timer;
+                    }
+                    else if (Movement.keys == 2)
+                    {
+                        Door.keySplit2 = Timer.timer;
+                    }
+                    else
+                    {
+                        Door.keySplit3 = Timer.timer;
+                    }
                 }
             }
         }

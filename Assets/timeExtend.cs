@@ -10,6 +10,7 @@ public class timeExtend : MonoBehaviour
     public Sprite farSprite;
     public Sprite nearSprite;
     public Sprite usedSprite;
+    public death death;
 
     private void OnTriggerEnter2D(Collider2D other) //player in der item hitbox
     {
@@ -31,6 +32,7 @@ public class timeExtend : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.Space)) //interaktion initiiert, item wird benutzt
                 {
                     used = true;
+                    death.increaseDeathTime();
                 }
             }
             else //item weit weg, geht zum normalen aussehen zurück

@@ -10,6 +10,7 @@ public class death : MonoBehaviour
     //public BoxCollider2D side;
     private bool triggerActive = false;
     public float deathTime = 180;
+    public int fuelTanks = 0;
     private float timer = -3;
 
     private void OnTriggerEnter2D(Collider2D other) //player in der hitbox
@@ -27,7 +28,6 @@ public class death : MonoBehaviour
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         timer += Time.deltaTime;
@@ -43,8 +43,9 @@ public class death : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    void increaseDeathTime()
+    public void increaseDeathTime()
     {
-
+        deathTime += 15;
+        fuelTanks++;
     }
 }

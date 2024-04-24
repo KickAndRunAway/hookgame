@@ -11,6 +11,10 @@ public class Door : MonoBehaviour
     public Timer Timer;
     public Movement Movement;
     public Animator animator;
+    public death death;
+    public float keySplit1 = 0;
+    public float keySplit2 = 0;
+    public float keySplit3 = 0;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -29,7 +33,7 @@ public class Door : MonoBehaviour
             if (Movement.keys == 3)
             {
                 animator.SetBool("allKeys", true);
-                ResultScreen.Setup(Timer.timer);
+                ResultScreen.Setup(Timer.timer, death.fuelTanks, keySplit1, keySplit2, keySplit3);
             }
             else
             {
