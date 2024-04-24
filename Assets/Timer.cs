@@ -18,7 +18,7 @@ public class Timer : MonoBehaviour
         }
         else
         {
-            text.color = new Color(255, 255, 255, 255);
+            text.color = new Color32(255, 255, 255, 255);
             text.text = ((int)(timer / 600) % 10).ToString() + ((int)(timer / 60) % 10).ToString() + ":" + ((int)((timer % 60) / 10)).ToString() + ((int)((timer % 60) % 10)).ToString() + ":" + ((int)(((timer * 100) % 60) / 10)).ToString() + ((int)((timer * 100) % 60) % 10).ToString();
         }
         
