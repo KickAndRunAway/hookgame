@@ -9,7 +9,7 @@ public class Door : MonoBehaviour
 {
     private bool triggerActive = false;
     private float i = 300f;
-    private string[] phrases = { "mfw keyless", "caught you lacking keys", "nuh uh", "you really thought", "tryna break in i see you", "im locked genius", "nothing is this easy in life", "try open sesame", "hell naw", "ask a teacher for the key", "" };
+    private string[] phrases = { "mfw keyless", "caught you lacking keys", "nuh uh", "you really thought", "tryna break in i see you", "im locked genius", "nothing is this easy in life", "try open sesame", "hell naw", "ask a teacher for the key", "does it look like open house to you", "Baldi heard you" };
     public SpriteRenderer spriteRenderer;
     public ResultScreen ResultScreen;
     public Timer Timer;
