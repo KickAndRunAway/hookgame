@@ -25,6 +25,7 @@ public class Door : MonoBehaviour
     public float keySplit3 = 0;
     public TextMeshProUGUI textBox;
     public float timer = 0;
+    public Animator Animator;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -50,6 +51,7 @@ public class Door : MonoBehaviour
                 GrapplingHook.goal = true;
                 DeathTime.SetActive(false);
                 DeathTimeText.SetActive(false);
+                Animator.Play("Base Layer.empty", 0, 0);
             }
             else
             {
