@@ -9,6 +9,7 @@ public class GrapplingHook : MonoBehaviour
     public DistanceJoint2D ropeJoint;
     public Movement playerMovement;
     public bool ropeAttached = false;
+    public bool goal = false;
     public float aimAngle;
     private Vector2 playerPosition;
     private Rigidbody2D ropeHingeAnchorRb;
@@ -33,7 +34,7 @@ public class GrapplingHook : MonoBehaviour
 
             var hit = Physics2D.Raycast(playerPosition, aimDirection, ropeMaxCastDistance, groundLayer);
         
-            if (hit.collider != null && timer >= 0) //hook trifft wand
+            if (hit.collider != null && timer >= 0 && !goal) //hook trifft wand
             {
                 ropeAttached = true;
                 if (!ropePositions.Contains(hit.point))

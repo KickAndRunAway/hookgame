@@ -12,6 +12,9 @@ public class death : MonoBehaviour
     public float deathTime = 180;
     public int fuelTanks = 0;
     private float timer = -3;
+    private float i = 161f;
+    public DeathTime DeathTime;
+    public GameObject transition;
 
     private void OnTriggerEnter2D(Collider2D other) //player in der hitbox
     {
@@ -34,7 +37,27 @@ public class death : MonoBehaviour
 
         if (Input.GetKey("r") || triggerActive || timer > deathTime)
         {
+            transition.transform.localPosition = new Vector3(transition.transform.localPosition.x, 1600f, transition.transform.localPosition.z);
+            i = 1f;
+        }
+
+        if (i < 160f)
+        {
+            transition.transform.localPosition = new Vector3(transition.transform.localPosition.x, 1600f - Mathf.Sqrt(i * 16000), transition.transform.localPosition.z);
+            i++;
+        }
+
+        else if (i == 160f)
+        {
             Restart();
+            i++;
+        }
+
+        else if (i < 320f)
+        {
+            transition.transform.localPosition = new Vector3(transition.transform.localPosition.x, -Mathf.Pow((i-160f)/4, 2f), transition.transform.localPosition.z);
+            i++;
+
         }
     }
 
@@ -47,5 +70,6 @@ public class death : MonoBehaviour
     {
         deathTime += 15;
         fuelTanks++;
+        DeathTime.deathTime += 15;
     }
 }

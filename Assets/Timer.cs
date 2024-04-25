@@ -14,12 +14,12 @@ public class Timer : MonoBehaviour
         timer += Time.deltaTime;
         if (timer < 0)
         {
-            text.text = "-" + (-(int)(timer / 600) % 10).ToString() + (-(int)(timer / 60) % 10).ToString() + ":" + (-(int)((timer % 60) / 10)).ToString() + (-(int)((timer % 60) % 10)).ToString() + ":" + (-(int)(((timer * 100) % 60) / 10)).ToString() + (-(int)((timer * 100) % 60) % 10).ToString();
+            text.text = "-" + (-(int)(timer / 600) % 10).ToString() + (-(int)(timer / 60) % 10).ToString() + ":" + (-(int)((timer % 60) / 10)).ToString() + (-(int)((timer % 60) % 10)).ToString() + ":" + (-(int)(((timer * 100) % 100) / 10)).ToString() + (-(int)((timer * 100) % 100) % 10).ToString();
         }
         else
         {
             text.color = new Color32(255, 255, 255, 255);
-            text.text = ((int)(timer / 600) % 10).ToString() + ((int)(timer / 60) % 10).ToString() + ":" + ((int)((timer % 60) / 10)).ToString() + ((int)((timer % 60) % 10)).ToString() + ":" + ((int)(((timer * 100) % 60) / 10)).ToString() + ((int)((timer * 100) % 60) % 10).ToString();
+            text.text = ((int)(timer / 600) % 10).ToString() + ((int)(timer / 60) % 10).ToString() + ":" + ((int)((timer % 60) / 10)).ToString() + ((int)((timer % 60) % 10)).ToString() + ":" + ((int)(((timer * 100) % 100) / 10)).ToString() + ((int)((timer * 100) % 100) % 10).ToString();
         }
         
     }
