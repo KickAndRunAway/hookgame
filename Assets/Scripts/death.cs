@@ -35,7 +35,7 @@ public class death : MonoBehaviour
     {
         timer += Time.deltaTime;
 
-        if (Input.GetKey("r") && i > 319f || triggerActive || timer > deathTime)
+        if (Input.GetKey("r") && i > 159f || triggerActive || timer > deathTime)
         {
             transition.transform.localPosition = new Vector3(transition.transform.localPosition.x, 1600f, transition.transform.localPosition.z);
             i = 1f;
@@ -43,7 +43,7 @@ public class death : MonoBehaviour
 
         if (i < 160f)
         {
-            transition.transform.localPosition = new Vector3(transition.transform.localPosition.x, 1600f - Mathf.Sqrt(i * 16000), transition.transform.localPosition.z);
+            transition.transform.localPosition = new Vector3(transition.transform.localPosition.x, 1600f - Mathf.Sqrt(i * 64000), transition.transform.localPosition.z);
             i++;
         }
 

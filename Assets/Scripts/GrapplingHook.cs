@@ -18,7 +18,7 @@ public class GrapplingHook : MonoBehaviour
     public LayerMask groundLayer;
     public float ropeMaxCastDistance = 50;
     private bool distanceSet;
-    public float climbSpeed = 6;
+    public float climbSpeed;
     private List<Vector2> ropePositions = new List<Vector2>();
     public Texture2D closeCursor;
     public Texture2D farCursor;
