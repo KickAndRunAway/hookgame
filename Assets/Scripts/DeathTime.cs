@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class DeathTime : MonoBehaviour
 {
-    private float timer = -3;
-    public float deathTime = 180;
+    private float timer = -3f;
+    public float deathTime = 180f;
     public TextMeshProUGUI CountdownText;
     void Update()
     {

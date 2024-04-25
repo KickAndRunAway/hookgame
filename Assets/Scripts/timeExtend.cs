@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class timeExtend : MonoBehaviour
@@ -11,6 +12,9 @@ public class timeExtend : MonoBehaviour
     public Sprite nearSprite;
     public Sprite usedSprite;
     public death death;
+    public GameObject fuelPopup;
+    public TextMeshProUGUI popupText;
+    private float i = 300f;
 
     private void OnTriggerEnter2D(Collider2D other) //player in der item hitbox
     {
@@ -33,6 +37,11 @@ public class timeExtend : MonoBehaviour
                 {
                     used = true;
                     death.increaseDeathTime();
+                    i = 0f;
+                    popupText.color = new Color(popupText.color.r, popupText.color.g, popupText.color.b, 1f);
+                    fuelPopup.transform.localPosition = new Vector3(fuelPopup.transform.localPosition.x, -454f, fuelPopup.transform.localPosition.z);
+                    fuelPopup.SetActive(true);
+
                 }
             }
             else //item weit weg, geht zum normalen aussehen zurück
@@ -45,5 +54,16 @@ public class timeExtend : MonoBehaviour
             spriteRenderer.sprite = usedSprite;
         }
 
+        if (i < 300f)
+        {
+            fuelPopup.transform.localPosition = new Vector3(fuelPopup.transform.localPosition.x, -454f + i / 20, fuelPopup.transform.localPosition.z);
+            popupText.color = new Color(popupText.color.r, popupText.color.g, popupText.color.b, 1f - i / 300);
+            i++;
+        }
+        else if (i == 300f)
+        {
+            i++;
+            fuelPopup.SetActive(false);
+        }
     }
 }

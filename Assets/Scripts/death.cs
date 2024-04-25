@@ -9,9 +9,9 @@ public class death : MonoBehaviour
     //public BoxCollider2D bottom;
     //public BoxCollider2D side;
     private bool triggerActive = false;
-    public float deathTime = 180;
+    public float deathTime = 180f;
     public int fuelTanks = 0;
-    private float timer = -3;
+    private float timer = -3f;
     private float i = 161f;
     public DeathTime DeathTime;
     public GameObject transition;
@@ -35,7 +35,7 @@ public class death : MonoBehaviour
     {
         timer += Time.deltaTime;
 
-        if (Input.GetKey("r") && i > 319f || triggerActive || timer > deathTime)
+        if (Input.GetKey("r") && i > 319f || triggerActive || Mathf.Abs(deathTime - timer) < 0.05)
         {
             transition.transform.localPosition = new Vector3(transition.transform.localPosition.x, 1600f, transition.transform.localPosition.z);
             i = 1f;
