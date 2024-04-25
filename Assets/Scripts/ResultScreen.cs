@@ -102,6 +102,7 @@ public class ResultScreen : MonoBehaviour
             Timer.SetActive(false); //timer auf dem bildschrim weg
         Results.SetActive(true); // resultate bildschrim wird gezeigt
         Color(finalTime, timeText);
+        UnityEngine.Debug.Log(finalTime);
         timeText.text = TimeToString(finalTime); //zeit display
         split1Text.text = "1: " + TimeToString(keySplit1);
         split2Text.text = "2: " + TimeToString(keySplit2);
