@@ -35,7 +35,7 @@ public class death : MonoBehaviour
     {
         timer += Time.deltaTime;
 
-        if (Input.GetKey("r") || triggerActive || timer > deathTime)
+        if (Input.GetKey("r") && i > 319f || triggerActive || timer > deathTime)
         {
             transition.transform.localPosition = new Vector3(transition.transform.localPosition.x, 1600f, transition.transform.localPosition.z);
             i = 1f;
