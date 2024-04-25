@@ -35,7 +35,7 @@ public class timeExtend : MonoBehaviour
                 spriteRenderer.sprite = nearSprite;
                 if (Input.GetKeyDown(KeyCode.Space)) //interaktion initiiert, item wird benutzt
                 {
-                    used = true;
+                    used = true; //animiert pop-up für kanister aufsammeln
                     death.increaseDeathTime();
                     i = 0f;
                     popupText.color = new Color(popupText.color.r, popupText.color.g, popupText.color.b, 1f);
@@ -54,7 +54,7 @@ public class timeExtend : MonoBehaviour
             spriteRenderer.sprite = usedSprite;
         }
 
-        if (i < 300f)
+        if (i < 300f) //pop-up animation, kanister aufgesammelt
         {
             fuelPopup.transform.localPosition = new Vector3(fuelPopup.transform.localPosition.x, -454f + i / 20, fuelPopup.transform.localPosition.z);
             popupText.color = new Color(popupText.color.r, popupText.color.g, popupText.color.b, 1f - i / 300);

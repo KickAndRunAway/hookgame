@@ -9,7 +9,7 @@ public class AudioControl : MonoBehaviour
 
     private void Awake()
     {
-        source.time = 14.8f;
+        source.time = 14.8f; //musik wird abgespielt wenn man das level betritt
 
         if (instance != null)
         {
@@ -17,7 +17,7 @@ public class AudioControl : MonoBehaviour
         }
         else
         {
-            instance = this;
+            instance = this; //die musik spielt weiter trotz neustarts
             DontDestroyOnLoad(gameObject);
         }
     }

@@ -10,7 +10,7 @@ public class DeathTime : MonoBehaviour
     public TextMeshProUGUI CountdownText;
     void Update()
     {
-        if (gameObject.activeSelf)
+        if (gameObject.activeSelf) //zeigt dem spieler die übrige zeit an
         {
             timer += Time.deltaTime;
             float timeLeft = deathTime - timer;

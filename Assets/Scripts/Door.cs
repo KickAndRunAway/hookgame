@@ -43,7 +43,7 @@ public class Door : MonoBehaviour
         {
             timer += Time.deltaTime;
 
-            if (Movement.keys == 3)
+            if (Movement.keys == 3) //das level wird abgeschlossen wenn man die tür betritt und alle drei schlüssel hat
             {
                 animator.SetBool("allKeys", true);
                 ResultScreen.Setup(Timer.timer, death.fuelTanks, keySplit1, keySplit2, keySplit3);
@@ -55,7 +55,7 @@ public class Door : MonoBehaviour
             }
             else
             {
-                textBox.text = phrases[UnityEngine.Random.Range(0, phrases.Length)];
+                textBox.text = phrases[UnityEngine.Random.Range(0, phrases.Length)]; //der spieler wird informiert, dass schlüssel fehlen
                 lacking.transform.position = new Vector3(lacking.transform.position.x, 139f, lacking.transform.position.z);
                 textBox.color = new Color(textBox.color.r, textBox.color.g, textBox.color.b, 1f);
                 lacking.SetActive(true);
@@ -64,7 +64,7 @@ public class Door : MonoBehaviour
             
         }
 
-        if (i < 300f)
+        if (i < 300f) //animation für info pop-up
         {
             lacking.transform.position = new Vector3(lacking.transform.position.x, 139f + i / 90, lacking.transform.position.z);
             textBox.color = new Color(textBox.color.r, textBox.color.g, textBox.color.b, 1f - i / 300);

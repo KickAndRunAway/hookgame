@@ -12,8 +12,7 @@ public class Loading : MonoBehaviour
         
     }
 
-    // Update is called once per frame
-    void Update()
+    void Update() //verbirgt das menü bis die animation geladen hat
     {
         timer += Time.deltaTime;
         if (timer > 2f)

@@ -31,7 +31,7 @@ public class Key : MonoBehaviour
                 {
                     used = true;
                     Movement.keys ++;
-                    if (Movement.keys == 1)
+                    if (Movement.keys == 1) //zeitpunkt zu dem der schlüssel aufgesammelt wird, wird aufgeschrieben
                     {
                         Door.keySplit1 = Timer.timer;
                     }

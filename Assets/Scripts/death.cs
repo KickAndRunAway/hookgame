@@ -35,13 +35,13 @@ public class death : MonoBehaviour
     {
         timer += Time.deltaTime;
 
-        if (Input.GetKey("r") && i > 319f || triggerActive || Mathf.Abs(deathTime - timer) < 0.05)
+        if (Input.GetKey("r") && i > 319f || triggerActive || Mathf.Abs(deathTime - timer) < 0.05) //bedingungen für neustart
         {
             transition.transform.localPosition = new Vector3(transition.transform.localPosition.x, 1600f, transition.transform.localPosition.z);
             i = 1f;
         }
 
-        if (i < 160f)
+        if (i < 160f) //animation während eines neustarts
         {
             transition.transform.localPosition = new Vector3(transition.transform.localPosition.x, 1600f - Mathf.Sqrt(i * 16000), transition.transform.localPosition.z);
             i++;
@@ -61,12 +61,12 @@ public class death : MonoBehaviour
         }
     }
 
-    void Restart()
+    void Restart() //neustart
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    public void increaseDeathTime()
+    public void increaseDeathTime() //verlängert die übrige zeit wenn ein kanister aufgesammelt wird
     {
         deathTime += 15;
         fuelTanks++;

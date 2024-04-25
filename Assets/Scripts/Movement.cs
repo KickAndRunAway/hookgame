@@ -134,7 +134,7 @@ void Update()
         }
     }
 
-    public bool isWallRight()
+    public bool isWallRight() //checkt für  kollision mit wand links und rechts, sowie mit dem boden
     {
         return !Physics2D.BoxCast(transform.position, boxSizeH, 0, transform.right, castDistanceH, groundLayer) || GrapplingHook.ropeAttached;
     }

@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayButton : MonoBehaviour
 {
-    public void PlayGame()
+    public void PlayGame() //betritt level wenn knopf gedrückt
     {
         SceneManager.LoadScene(1);
     }
