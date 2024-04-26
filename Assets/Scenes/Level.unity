@@ -49383,7 +49383,7 @@ MonoBehaviour:
   animator: {fileID: 1869930402}
   death: {fileID: 95141240}
   DeathTime: {fileID: 1914659358}
-  DeathTimeText: {fileID: 1989234793}
+  DeathTimeText: {fileID: 2045152898}
   lacking: {fileID: 2130680420}
   keySplit1: 0
   keySplit2: 0
