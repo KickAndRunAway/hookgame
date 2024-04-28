@@ -9,6 +9,7 @@ public class death : MonoBehaviour
     //public BoxCollider2D bottom;
     //public BoxCollider2D side;
     private bool triggerActive = false;
+    public bool goal = false;
     public float deathTime = 180f;
     public int fuelTanks = 0;
     private float timer = -3f;
