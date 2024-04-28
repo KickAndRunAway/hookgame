@@ -16,6 +16,7 @@ public class death : MonoBehaviour
     private float i = 161f;
     public DeathTime DeathTime;
     public GameObject transition;
+    public GameObject results;
 
     private void OnTriggerEnter2D(Collider2D other) //player in der hitbox
     {
@@ -34,8 +35,10 @@ public class death : MonoBehaviour
 
     void Update()
     {
-        timer += Time.deltaTime;
-
+        if (!results.activeSelf)
+        {
+            timer += Time.deltaTime;
+        }
         if (Input.GetKey("r") && i > 319f || triggerActive || Mathf.Abs(deathTime - timer) < 0.05) //bedingungen für neustart
         {
             transition.transform.localPosition = new Vector3(transition.transform.localPosition.x, 1600f, transition.transform.localPosition.z);

@@ -132,9 +132,13 @@ public class ResultScreen : MonoBehaviour
         {
             text.color = new Color32(112, 209, 244, 255);
         }
-        else
+        else if (finalT > 42.67f)
         {
             text.color = new Color32(224, 17, 95, 255);
+        }
+        else
+        {
+            text.color = new Color32(149, 64, 192, 255);
         }
     }
 }
